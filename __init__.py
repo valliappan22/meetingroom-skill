@@ -9,20 +9,17 @@ class Meetingroom(MycroftSkill):
     def handle_meetingroom(self, message):
         meeting_type = message.data.get('roomName')
         if meeting_type is not None:
-            self.speak_dialog("i don't know about the",
+            self.speak_dialog("i_don't_know_about_the",
                               {'type': meeting_type})
-            self.doyouwantToRepeat()
+            response = self.ask_yesno('Do_you_want_me_to_repeat')
+            if response == 'yes':
+                self.speak_dialog("i_don't_know_about_the",
+                              {'type': meeting_type})
+                self.speak_dialog('Have_a_nice_day')
+
         else:
             self.speak_dialog('meetingroom')
             response = self.get_response('meetingroom', num_retries=0)
-    @intent_file_handler('repeat.intent')
-    def doyouwantToRepeat():
-         self.speak_dialog('Do you want me to repeat')
-         response = self.get_response('repeat', num_retries=0)
-         if response is None:
-            self.speak_dialog('Have a nice day')
-        if response is not None:
-            self.speak_dialog('Have a nice day')
 
     def stop(self):
     pass
