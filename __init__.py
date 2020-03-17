@@ -19,7 +19,6 @@ class Meetingroom(MycroftSkill):
 
         else:
             self.speak_dialog('meetingroom')
-            response = self.get_response('meetingroom', num_retries=0)
 
     def stop(self):
     pass
